@@ -1,0 +1,4 @@
+.dropdown-menu > .item-1:hover > span,
+.dropdown-menu > .item-2:hover > span {
+    display: block !important;
+}
