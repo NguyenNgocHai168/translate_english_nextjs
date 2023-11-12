@@ -4,6 +4,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, run the development server:
 
+cài đặt nodejs version 18.. trở lên mới chạy được project.
+
 ```bash
 run-1:
   npm install

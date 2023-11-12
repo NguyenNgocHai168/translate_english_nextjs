@@ -1,7 +1,36 @@
+"use client"
 import Navbar from "@/component/Navbar";
 import './style.css'
 
+import datas from './data.json'
+import { useEffect, useState } from "react";
+let options = [
+    {
+        id: 1,
+        name: "N5"
+    },
+    {
+        id: 2,
+        name: "N4"
+    },
+    {
+        id: 3,
+        name: "N3"
+    },
+]
+
 export default function VocabularyList() {
+    let [number, setNumber] = useState<any>(1)
+    let [vocalList, setVocalList] = useState<[]>([])
+
+    useEffect(() => {
+        let result: any = datas.filter((item) => item.WorkLevel.ID == number)
+        setVocalList(result)
+    }, [number])
+
+    console.log(vocalList);
+    
+
     return (
         <div className="position-relative">
             <Navbar />
@@ -9,11 +38,10 @@ export default function VocabularyList() {
                 <h5 className="card-header text-uppercase">Danh sách từ</h5>
                 <div className="card-body">
                     <div className="input-group mb-3">
-                    <select className="form-select" aria-label="Default select example">
-                        <option selected>Javascript</option>
-                        <option value="1">HTML & CSS</option>
-                        <option value="2">React</option>
-                        <option value="3">NodeJS</option>
+                    <select className="form-select" aria-label="Default select example" onChange={(e) => setNumber(e.target.value)}>
+                        {options.map((item, index) => { 
+                            return <option value={item.id} key={index}>{item.name}</option>    
+                        })}
                     </select>
                     </div>
                     <div className="alert alert-primary">
@@ -26,61 +54,16 @@ export default function VocabularyList() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Variable</td>
-                                    <td>Biến</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Declare</td>
-                                    <td>khai báo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Number</td>
-                                    <td>1 Số</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>String</td>
-                                    <td>Chuỗi</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Function</td>
-                                    <td>Hàm</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Number</td>
-                                    <td>1 Số</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>String</td>
-                                    <td>Chuỗi</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Function</td>
-                                    <td>Hàm</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Number</td>
-                                    <td>1 Số</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">4</th>
-                                    <td>String</td>
-                                    <td>Chuỗi</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">5</th>
-                                    <td>Function</td>
-                                    <td>Hàm</td>
-                                </tr>
+                                {vocalList.map((item:any, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            <th scope="row">{item.WorkLevel.ID}</th>
+                                            <td>{item.Kana}</td>
+                                            <td>{item.Imi}</td>
+                                        </tr>
+                                    )
+                                })}
+                                
                             </tbody>
                         </table>
                     </div>
